@@ -1,0 +1,33 @@
+{
+  "name": "binary-translator",
+  "version": "0.1.0",
+  "description": "Binary Translator for Telegram",
+  "main": "bin/function.js",
+  "scripts": {
+    "start": "node bin/local.js",
+    "start:dev": "DEBUG=app:* dotenv nodemon bin/local.js",
+    "deploy": "gcloud functions deploy binaryTranslator --trigger-http --project ultr4nerd --runtime nodejs14"
+  },
+  "keywords": [
+    "telegram",
+    "binary",
+    "ascii",
+    "text"
+  ],
+  "author": "Mauricio Chávez Olea <mauriciochavezolea@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.1",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "mongoose": "^5.13.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^4.0.0",
+    "nodemon": "^2.0.9"
+  }
+}
