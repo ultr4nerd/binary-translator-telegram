@@ -3,6 +3,7 @@ const {connectToDatabase} = require('../utils/database')
 
 app.use(async (req, res, next) => {
   await connectToDatabase()
+  console.log('database connected...')
   next()
 })
 

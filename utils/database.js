@@ -1,12 +1,15 @@
 const mongoose = require('mongoose')
 
+let connected = false
+
 async function connectToDatabase() {
-  if ([0, 3].includes(mongoose.connection.readyState)) {
+  if (!connected) {
     await mongoose.connect(process.env.DATABASE_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
+    connected = true
   }
 }
 
