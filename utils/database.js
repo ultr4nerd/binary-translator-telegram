@@ -13,4 +13,11 @@ async function connectToDatabase() {
   }
 }
 
-module.exports = {connectToDatabase}
+async function databaseMiddleware(req, res, next) {
+  console.log('connecting database...')
+  await connectToDatabase()
+  console.log('database connected...')
+  next()
+}
+
+module.exports = {databaseMiddleware}

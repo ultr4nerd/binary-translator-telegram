@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const helmet = require('helmet')
 const morgan = require('morgan')
+const {databaseMiddleware} = require('./utils/database')
 
 const app = express()
 
@@ -14,14 +15,10 @@ app.use(cors())
 app.use(helmet())
 app.use(morgan('dev'))
 
+// Local middleware
+app.use(databaseMiddleware)
+
 // Routes
 app.use('/telegram', require('./routes/telegram'))
-
-// Error handling
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.sendStatus(200)
-});
-
 
 module.exports = app
