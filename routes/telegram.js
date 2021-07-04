@@ -40,7 +40,11 @@ router.post('/:token', async (req, res) => {
     } else if (chat.mode === 'text') {
       const result = translatorService.textToBinary(text)
       if (result) {
-        await telegramService.sendSimpleMessage(chatID, result)
+        if (result.length <= 4096) {
+          await telegramService.sendSimpleMessage(chatID, result)
+        } else {
+          await telegramService.sendSimpleMessage(chatID, 'El resultado es muy largo')
+        }
       } else {
         const message = 'No fue posible traducir este mensaje de texto a binario, inténtalo de nuevo'
         await telegramService.sendSimpleMessage(chatID, message)
@@ -48,7 +52,11 @@ router.post('/:token', async (req, res) => {
     } else if (chat.mode === 'binary') {
       const result = translatorService.binaryToText(text)
       if (result && !translatorService.isEmpty(result)) {
-        await telegramService.sendSimpleMessage(chatID, result)
+        if (result.length <= 4096) {
+          await telegramService.sendSimpleMessage(chatID, result)
+        } else {
+          await telegramService.sendSimpleMessage(chatID, 'El resultado es muy largo')
+        }
       } else {
         const message = 'No fue posible traducir este mensaje de binario a texto, inténtalo de nuevo'
         await telegramService.sendSimpleMessage(chatID, message)
