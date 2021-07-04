@@ -47,7 +47,7 @@ router.post('/:token', async (req, res) => {
       }
     } else if (chat.mode === 'binary') {
       const result = translatorService.binaryToText(text)
-      if (result) {
+      if (result && !translatorService.isEmpty(result)) {
         await telegramService.sendSimpleMessage(chatID, result)
       } else {
         const message = 'No fue posible traducir este mensaje de binario a texto, inténtalo de nuevo'

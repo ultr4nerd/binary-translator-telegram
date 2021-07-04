@@ -12,6 +12,12 @@ class TranslatorService {
       .map(bin => String.fromCharCode(parseInt(bin, 2)))
       .join('');
   }
+
+  isEmpty(text) {
+    let reviewedText = text
+    reviewedText = reviewedText.replace(/\x00/g, '')
+    return reviewedText === ''
+  }
 }
 
 module.exports = new TranslatorService()

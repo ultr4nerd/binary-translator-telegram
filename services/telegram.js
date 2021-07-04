@@ -11,9 +11,9 @@ class TelegramService {
       return update.message.chat.id
     } else if (update.callback_query) {
       return update.callback_query.from.id
-    } else if(update) {
+    } else if (update) {
       return update.my_chat_member.from.id
-    }else {
+    } else {
       return null
     }
   }
@@ -44,6 +44,9 @@ class TelegramService {
   }
 
   async sendSimpleMessage(chatID, text) {
+    if (!text) {
+      return
+    }
     const data = {chat_id: chatID, text: text}
     await this.run('sendMessage', data)
   }
